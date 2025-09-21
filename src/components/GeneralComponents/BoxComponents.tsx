@@ -1,4 +1,4 @@
-import { View, Text, StyleProp, ViewStyle } from 'react-native'
+import { View, StyleProp, ViewStyle } from 'react-native'
 import React from 'react'
 
 export const HBox = ({ children, style }: { children: React.ReactNode, style?: StyleProp<ViewStyle> }): React.JSX.Element => {
