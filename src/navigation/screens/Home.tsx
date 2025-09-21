@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import HeaderSection from '../../components/HomeComponents/HeaderSection/HeaderSection';
-export function Home() {
+import { VBox } from '../../components/GeneralComponents/BoxComponents';
+export const Home: React.FC = () => {
   return (
-    <View style={[styles.container]}>
+    <VBox style={[styles.container]}>
       <HeaderSection />
-    </View>
+    </VBox>
   );
 }
 

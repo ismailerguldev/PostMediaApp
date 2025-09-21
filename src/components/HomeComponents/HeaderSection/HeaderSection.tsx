@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import React from 'react'
 import { styles } from './styles'
 import { theme } from '../../../config/constants'
 import { Icons } from '../../../assets/icons/icons'
 import { HBox, VBox } from '../../GeneralComponents/BoxComponents'
 
-const HeaderSection = () => {
+const HeaderSection: React.FC = () => {
     return (
         <HBox style={
             [
