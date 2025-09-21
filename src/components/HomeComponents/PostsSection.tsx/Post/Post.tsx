@@ -1,22 +1,33 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IPost } from '../../../../models/Post'
 import { HBox, VBox } from '../../../GeneralComponents/BoxComponents'
 import { useTheme } from '@react-navigation/native'
 import { styles } from './styles'
 import Divider from '../../../GeneralComponents/Divider'
 import { Icons } from '../../../../assets/icons/icons'
+import { useDispatch } from 'react-redux'
+import { setLikeds } from '../../../../redux/slices/userSlice'
+import { useAppSelector } from '../../../../redux/hooks'
 
 const Post = ({ post }: { post: IPost }): React.JSX.Element => {
     const { colors }: ReactNavigation.Theme = useTheme()
     const [like, setLike] = useState<number>(Math.floor(Math.random() * 11))
     const [comment, setComment] = useState<number>(Math.floor(Math.random() * 11))
     const [isLiked, setIsLiked] = useState<boolean>(false)
+    const [likedPosts, setLikedPosts] = useState<IPost[]>([])
+    const dispatch = useDispatch()
     const handleLike = (): void => {
         if (isLiked) {
+            const updatedPosts: IPost[] = likedPosts.filter(p => p.id !== post.id)
+            setLikedPosts(updatedPosts)
+            dispatch(setLikeds(updatedPosts))
             setLike(prev => prev - 1)
             setIsLiked(false)
         } else {
+            const updatedPosts: IPost[] = [post, ...likedPosts]
+            setLikedPosts(updatedPosts)
+            dispatch(setLikeds(updatedPosts))
             setLike(prev => prev + 1)
             setIsLiked(true)
         }
