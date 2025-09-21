@@ -15,6 +15,12 @@ import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
 
 const HomeTabs = createBottomTabNavigator({
+  screenOptions: {
+    headerShown: false,
+    tabBarStyle: {
+      borderTopWidth: 0,
+    }
+  },
   screens: {
     Home: {
       screen: Home,
@@ -100,6 +106,6 @@ type RootStackParamList = StaticParamList<typeof RootStack>;
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }

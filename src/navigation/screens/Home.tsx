@@ -1,12 +1,9 @@
 import { StyleSheet, View } from 'react-native';
-import { getPosts } from '../../services/PostService';
-import { useState } from 'react';
-import { IPost } from '../../models/Post';
+import HeaderSection from '../../components/HomeComponents/HeaderSection/HeaderSection';
 export function Home() {
-  const [posts, setPosts] = useState<IPost[]>([])
   return (
-    <View style={styles.container}>
-      
+    <View style={[styles.container]}>
+      <HeaderSection />
     </View>
   );
 }
@@ -14,8 +11,9 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    gap: 10,
+    gap: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
 });

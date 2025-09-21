@@ -1,19 +1,15 @@
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createURL } from 'expo-linking';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
-import { useColorScheme } from 'react-native';
 import { Navigation } from './navigation';
+import { theme } from './config/constants';
 
 SplashScreen.preventAutoHideAsync();
 
 const prefix = createURL('/');
 
-export function App() {
-  const colorScheme = useColorScheme();
-
-  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
-
+export const App: React.FC = () => {
+  //const colorScheme = useColorScheme();
   return (
     <Navigation
       theme={theme}
