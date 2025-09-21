@@ -1,15 +1,12 @@
-import { Button, Text } from '@react-navigation/elements';
 import { StyleSheet, View } from 'react-native';
-
+import { getPosts } from '../../services/PostService';
+import { useState } from 'react';
+import { IPost } from '../../models/Post';
 export function Home() {
+  const [posts, setPosts] = useState<IPost[]>([])
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button screen="Profile" params={{ user: 'jane' }}>
-        Go to Profile
-      </Button>
-      <Button screen="Settings">Go to Settings</Button>
+      
     </View>
   );
 }
