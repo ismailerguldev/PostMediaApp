@@ -7,31 +7,39 @@ import { styles } from './styles'
 import Divider from '../../../GeneralComponents/Divider'
 import { Icons } from '../../../../assets/icons/icons'
 import { useDispatch } from 'react-redux'
-import { setLikeds } from '../../../../redux/slices/userSlice'
 import { useAppSelector } from '../../../../redux/hooks'
+import { setLikeds } from '../../../../redux/slices/userSlice'
 
 const Post = ({ post }: { post: IPost }): React.JSX.Element => {
     const { colors }: ReactNavigation.Theme = useTheme()
-    const [like, setLike] = useState<number>(Math.floor(Math.random() * 11))
-    const [comment, setComment] = useState<number>(Math.floor(Math.random() * 11))
-    const [isLiked, setIsLiked] = useState<boolean>(false)
-    const [likedPosts, setLikedPosts] = useState<IPost[]>([])
+    const likedPosts: IPost[] = useAppSelector((state) => state.user.liked)
+    const [isLiked, setIsLiked] = useState<boolean>(likedPosts.some(p => p.id === post.id))
+    const [likeCount, setLikeCount] = useState<number>(post.likeCount ?? 0)
+    const commentCount: number = post.commentCount!
     const dispatch = useDispatch()
-    const handleLike = (): void => {
+    const handleLike = () => {
         if (isLiked) {
-            const updatedPosts: IPost[] = likedPosts.filter(p => p.id !== post.id)
-            setLikedPosts(updatedPosts)
-            dispatch(setLikeds(updatedPosts))
-            setLike(prev => prev - 1)
+            setLikeCount(prev => prev - 1)
             setIsLiked(false)
-        } else {
-            const updatedPosts: IPost[] = [post, ...likedPosts]
-            setLikedPosts(updatedPosts)
+            const updatedPosts: IPost[] = likedPosts.filter(p => p.id !== post.id)
             dispatch(setLikeds(updatedPosts))
-            setLike(prev => prev + 1)
+        } else {
+            const updatedPosts: IPost[] = [{ ...post, likeCount: likeCount + 1 }, ...likedPosts]
+            dispatch(setLikeds(updatedPosts))
+            setLikeCount(prev => prev + 1)
             setIsLiked(true)
         }
     }
+    useEffect(() => {
+        const likedPost = likedPosts.find(p => p.id === post.id)
+        if (likedPost) {
+            setIsLiked(true)
+            setLikeCount(likedPost.likeCount ?? 0)
+        } else {
+            setIsLiked(false)
+            setLikeCount(post.likeCount ?? 0)
+        }
+    }, [likedPosts])
     return (
         <VBox style={[styles.container, { backgroundColor: colors.card }]}>
             <HBox style={[styles.titleSection]}>
@@ -47,13 +55,13 @@ const Post = ({ post }: { post: IPost }): React.JSX.Element => {
                 <TouchableOpacity onPress={handleLike}>
                     <HBox style={[styles.actionIcons, { borderColor: colors.border, }]}>
                         <Icons.Like color={isLiked ? "red" : colors.text} size={24} />
-                        <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{like}</Text>
+                        <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{likeCount}</Text>
                     </HBox>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <HBox style={[styles.actionIcons, { borderColor: colors.border, }]}>
                         <Icons.Comment color={colors.text} size={24} />
-                        <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{comment}</Text>
+                        <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{commentCount}</Text>
                     </HBox>
                 </TouchableOpacity>
             </HBox>

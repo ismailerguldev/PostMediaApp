@@ -12,7 +12,13 @@ const PostsSection: React.FC = () => {
     useEffect(() => {
         (
             async (): Promise<void> => {
-                setPosts(await getPosts())
+                const resposts: IPost[] = await getPosts()
+                const normalizedPosts: IPost[] = resposts.map(p => ({
+                    ...p,
+                    likeCount: Math.floor(Math.random() * 11),
+                    commentCount: 0
+                }))
+                setPosts(normalizedPosts)
             }
         )()
     }, [])
