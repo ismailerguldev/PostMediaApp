@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import HeaderSection from '../../components/HomeComponents/HeaderSection/HeaderSection';
 import { VBox } from '../../components/GeneralComponents/BoxComponents';
 import PostsSection from '../../components/HomeComponents/PostsSection.tsx/PostsSection';
 export const Home: React.FC = () => {

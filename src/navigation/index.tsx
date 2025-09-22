@@ -11,16 +11,18 @@ import newspaper from '../assets/newspaper.png';
 import { Home } from './screens/Home';
 import Likes from './screens/Likes';
 import HeaderSection from '../components/HomeComponents/HeaderSection/HeaderSection';
+import { Icons } from '../assets/icons/icons';
 const HomeTabs = createBottomTabNavigator({
   screenOptions: {
     header(props) {
-      return(
+      return (
         <HeaderSection route={props.route.name} />
       )
     },
     tabBarStyle: {
       borderTopWidth: 0,
-    }
+    },
+    tabBarLabelStyle: { fontSize: 16, }
   },
   screens: {
     Home: {
@@ -28,30 +30,15 @@ const HomeTabs = createBottomTabNavigator({
       options: {
         title: 'Feed',
         tabBarIcon: ({ color, size }) => (
-          <Image
-            source={newspaper}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
+          <Icons.Home color={color} size={size} />
         ),
       },
     },
     Likes: {
       screen: Likes,
       options: {
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={bell}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
+        tabBarIcon: ({ color, size, focused }) => focused ? <Icons.FLike color={color} size={size} /> : <Icons.Like color={color} size={size} />,
+        tabBarInactiveTintColor: "#cacaca",
       },
     },
   },

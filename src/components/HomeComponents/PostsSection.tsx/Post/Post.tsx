@@ -49,15 +49,16 @@ const Post = ({ post }: { post: IPost }): React.JSX.Element => {
                     <Text style={[{ color: colors.text }, styles.title]}>{post.title.slice(0, 30)}</Text>
                 </VBox>
             </HBox>
-            <Divider width='100%' style={{ marginTop: 8 }} />
+            <Divider horizontal size='100%' style={{ marginTop: 8 }} />
             <Text style={[{ color: colors.text }]}>{post.body}</Text>
-            <HBox style={[{ gap: 16, marginLeft: 16, marginTop: 8 }]}>
+            <HBox style={[{ gap: 8, marginLeft: 16, marginTop: 8 }]}>
                 <TouchableOpacity onPress={handleLike}>
                     <HBox style={[styles.actionIcons, { borderColor: colors.border, }]}>
                         <Icons.Like color={isLiked ? "red" : colors.text} size={24} />
                         <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{likeCount}</Text>
                     </HBox>
                 </TouchableOpacity>
+                <Divider horizontal={false} size='50%' />
                 <TouchableOpacity>
                     <HBox style={[styles.actionIcons, { borderColor: colors.border, }]}>
                         <Icons.Comment color={colors.text} size={24} />

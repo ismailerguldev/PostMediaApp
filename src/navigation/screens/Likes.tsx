@@ -14,7 +14,7 @@ const Likes: React.FC = () => {
     const insets = useSafeAreaInsets()
     const { colors } = useTheme()
     return (
-        <VBox style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <VBox style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 16, }}>
             {
                 likedPosts.length > 0 ? (
                     <FlatList

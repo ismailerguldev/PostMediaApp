@@ -12,9 +12,13 @@ export const Icons = {
     Bell: (props: Props) =>
         (<View style={props.style}><FontAwesome5 name="bell" size={props.size} color={props.color} /></View>),
     Like: (props: Props) =>
-        (<View style={props.style}><Feather name="heart" size={props.size} color={props.color} /></View>),
+        (<View style={props.style}><Entypo name="heart-outlined" size={props.size} color={props.color} /></View>),
     Comment: (props: Props) =>
         (<View style={props.style}><FontAwesome name="comment-o" size={props.size} color={props.color} /></View>),
     Sad: (props: Props) =>
-        (<View style={props.style}><Entypo name="emoji-sad" size={props.size} color={props.color} /></View>)
+        (<View style={props.style}><Entypo name="emoji-sad" size={props.size} color={props.color} /></View>),
+    Home: (props: Props) =>
+        (<View style={props.style}><Entypo name="home" size={props.size} color={props.color} /></View>),
+    FLike: (props: Props) =>
+        (<View style={props.style}><Entypo name="heart" size={props.size} color={props.color} /></View>)
 }

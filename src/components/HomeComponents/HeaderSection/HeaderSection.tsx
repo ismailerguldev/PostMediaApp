@@ -6,6 +6,7 @@ import { Icons } from '../../../assets/icons/icons'
 import { HBox, VBox } from '../../GeneralComponents/BoxComponents'
 import HomePageHeader from './HomePageHeader'
 import LikePageHeader from './LikePageHeader'
+import Divider from '../../GeneralComponents/Divider'
 
 const HeaderSection = ({ route }: { route: string }): React.JSX.Element => {
     return (

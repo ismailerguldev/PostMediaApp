@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     titleSection: {
-        gap: 4,
+        gap: 8,
     },
     subTitle: {
         fontSize: 16,
