@@ -7,8 +7,9 @@ import { styles } from './styles'
 import Divider from '../../../GeneralComponents/Divider'
 import { Icons } from '../../../../assets/icons/icons'
 import { useDispatch } from 'react-redux'
-import { useAppSelector } from '../../../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
 import { setLikeds } from '../../../../redux/slices/userSlice'
+import { saveLikeds } from '../../../../services/PostCacheService'
 
 const Post = ({ post }: { post: IPost }): React.JSX.Element => {
     const { colors }: ReactNavigation.Theme = useTheme()
@@ -16,15 +17,17 @@ const Post = ({ post }: { post: IPost }): React.JSX.Element => {
     const [isLiked, setIsLiked] = useState<boolean>(likedPosts.some(p => p.id === post.id))
     const [likeCount, setLikeCount] = useState<number>(post.likeCount ?? 0)
     const commentCount: number = post.commentCount!
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const handleLike = () => {
         if (isLiked) {
             setLikeCount(prev => prev - 1)
             setIsLiked(false)
             const updatedPosts: IPost[] = likedPosts.filter(p => p.id !== post.id)
+            dispatch(saveLikeds(updatedPosts))
             dispatch(setLikeds(updatedPosts))
         } else {
             const updatedPosts: IPost[] = [{ ...post, likeCount: likeCount + 1 }, ...likedPosts]
+            dispatch(saveLikeds(updatedPosts))
             dispatch(setLikeds(updatedPosts))
             setLikeCount(prev => prev + 1)
             setIsLiked(true)
