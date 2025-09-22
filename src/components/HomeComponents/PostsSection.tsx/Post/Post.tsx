@@ -54,7 +54,9 @@ const Post = ({ post }: { post: IPost }): React.JSX.Element => {
             <HBox style={[{ gap: 8, marginLeft: 16, marginTop: 8 }]}>
                 <TouchableOpacity onPress={handleLike}>
                     <HBox style={[styles.actionIcons, { borderColor: colors.border, }]}>
-                        <Icons.Like color={isLiked ? "red" : colors.text} size={24} />
+                        {
+                            isLiked ? <Icons.FLike color={"red"} size={24} /> : <Icons.Like color={colors.text} size={24} />
+                        }
                         <Text style={{ color: colors.text, fontSize: 16, fontWeight: "bold" }}>{likeCount}</Text>
                     </HBox>
                 </TouchableOpacity>
