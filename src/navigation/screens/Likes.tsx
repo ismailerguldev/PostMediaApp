@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
 import { VBox } from '../../components/GeneralComponents/BoxComponents'
 import HeaderSection from '../../components/HomeComponents/HeaderSection/HeaderSection'
@@ -13,16 +13,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Likes: React.FC = () => {
     const likedPosts: IPost[] = useAppSelector((state) => state.user.liked)
+    const isLoading = useAppSelector((state) => state.user.isLoadingLikes)
     const insets = useSafeAreaInsets()
     const { colors } = useTheme()
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        (async () => { await dispatch(getLikeds()); })()
-    }, [])
     return (
         <VBox style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 16, }}>
             {
-                likedPosts.length > 0 ? (
+                isLoading === "fulfilled" ? (
                     <FlatList
                         data={likedPosts}
                         showsVerticalScrollIndicator={false}
@@ -32,7 +29,7 @@ const Likes: React.FC = () => {
                         renderItem={({ item }) => (
                             <Post post={item} />
                         )} />
-                ) :
+                ) : isLoading === "empty" || isLoading === "rejected" ?
                     (
                         <VBox style={{ justifyContent: "center", alignItems: "center", gap: 16 }}>
                             <Icons.Sad color={colors.text} style={{ opacity: 0.5 }} size={48} />
@@ -40,6 +37,7 @@ const Likes: React.FC = () => {
                         </VBox>
 
                     )
+                    : <ActivityIndicator size={"large"} color={"black"} />
             }
 
 

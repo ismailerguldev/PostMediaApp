@@ -24,11 +24,9 @@ const Post = ({ post }: { post: IPost }): React.JSX.Element => {
             setIsLiked(false)
             const updatedPosts: IPost[] = likedPosts.filter(p => p.id !== post.id)
             dispatch(saveLikeds(updatedPosts))
-            dispatch(setLikeds(updatedPosts))
         } else {
             const updatedPosts: IPost[] = [{ ...post, likeCount: likeCount + 1 }, ...likedPosts]
             dispatch(saveLikeds(updatedPosts))
-            dispatch(setLikeds(updatedPosts))
             setLikeCount(prev => prev + 1)
             setIsLiked(true)
         }

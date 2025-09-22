@@ -8,14 +8,16 @@ export interface IUserState {
     username: string,
     liked: IPost[],
     allPosts: IPost[],
-    isLoading: "pending" | "fulfilled" | "rejected" | "empty"
+    isFetchingPosts: "pending" | "fulfilled" | "rejected" | "empty",
+    isLoadingLikes: "pending" | "fulfilled" | "rejected" | "empty"
 }
 
 const initialState: IUserState = {
     username: "",
     liked: [],
     allPosts: [],
-    isLoading: "empty"
+    isFetchingPosts:"empty",
+    isLoadingLikes:"empty"
 }
 
 export const userSlice = createSlice({
@@ -32,34 +34,40 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(saveLikeds.pending, (state, action) => {
-                state.isLoading = "pending"
+                state.isLoadingLikes = "pending"
             })
             .addCase(saveLikeds.fulfilled, (state, action: PayloadAction<IPost[]>) => {
                 state.liked = [...action.payload]
-                state.isLoading = "fulfilled"
+                state.isLoadingLikes = "fulfilled"
             })
             .addCase(saveLikeds.rejected, (state, action) => {
-                state.isLoading = "rejected"
+                state.isLoadingLikes = "rejected"
             })
             .addCase(getLikeds.pending, (state, action) => {
-                state.isLoading = "pending"
+                state.isLoadingLikes = "pending"
+                console.log("şu anda pending")
             })
             .addCase(getLikeds.fulfilled, (state, action: PayloadAction<IPost[]>) => {
                 state.liked = [...action.payload]
-                state.isLoading = "fulfilled"
+                state.isLoadingLikes = "fulfilled"
+                console.log("şu an çekme bitti")
             })
             .addCase(getLikeds.rejected, (state, action) => {
-                state.isLoading = "rejected"
+                state.isLoadingLikes = "rejected"
+                console.log("getlikeds rejected oldu")
             })
             .addCase(getPosts.pending, (state, action) => {
-                state.isLoading = "pending"
+                state.isFetchingPosts = "pending"
+                console.log("postları çekme başladı")
             })
             .addCase(getPosts.fulfilled, (state, action: PayloadAction<IPost[]>) => {
-                state.isLoading = "fulfilled"
+                state.isFetchingPosts = "fulfilled"
                 state.allPosts = [...action.payload]
+                console.log("postları çekme bitti")
             })
             .addCase(getPosts.rejected, (state, action) => {
-                state.isLoading = "rejected"
+                state.isFetchingPosts = "rejected"
+                console.log("postları çekme reddedildi")
             })
     }
 })

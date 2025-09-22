@@ -11,11 +11,6 @@ import { getLikeds } from '../../../services/PostCacheService'
 const PostsSection: React.FC = () => {
     const posts = useAppSelector((state) => state.user.allPosts)
     const insets: EdgeInsets = useSafeAreaInsets()
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        (async () => { await dispatch(getLikeds()); })()
-        dispatch(getPosts())
-    }, [])
     return (
         <FlatList
             data={posts.slice(0, 30)}
