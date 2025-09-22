@@ -5,7 +5,6 @@ import PostsSection from '../../components/HomeComponents/PostsSection.tsx/Posts
 export const Home: React.FC = () => {
   return (
     <VBox style={[styles.container]}>
-      <HeaderSection />
       <PostsSection />
     </VBox>
   );

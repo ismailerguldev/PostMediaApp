@@ -1,6 +1,7 @@
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Entypo from '@expo/vector-icons/Entypo';
 import { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 type Props = {
     size: number,
@@ -13,5 +14,7 @@ export const Icons = {
     Like: (props: Props) =>
         (<View style={props.style}><Feather name="heart" size={props.size} color={props.color} /></View>),
     Comment: (props: Props) =>
-        (<View style={props.style}><FontAwesome name="comment-o" size={props.size} color={props.color} /></View>)
+        (<View style={props.style}><FontAwesome name="comment-o" size={props.size} color={props.color} /></View>),
+    Sad: (props: Props) =>
+        (<View style={props.style}><Entypo name="emoji-sad" size={props.size} color={props.color} /></View>)
 }

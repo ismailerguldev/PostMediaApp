@@ -9,14 +9,15 @@ import { Image } from 'react-native';
 import bell from '../assets/bell.png';
 import newspaper from '../assets/newspaper.png';
 import { Home } from './screens/Home';
-import { Profile } from './screens/Profile';
-import { Settings } from './screens/Settings';
-import { Updates } from './screens/Updates';
-import { NotFound } from './screens/NotFound';
-
+import Likes from './screens/Likes';
+import HeaderSection from '../components/HomeComponents/HeaderSection/HeaderSection';
 const HomeTabs = createBottomTabNavigator({
   screenOptions: {
-    headerShown: false,
+    header(props) {
+      return(
+        <HeaderSection route={props.route.name} />
+      )
+    },
     tabBarStyle: {
       borderTopWidth: 0,
     }
@@ -38,8 +39,8 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
-    Updates: {
-      screen: Updates,
+    Likes: {
+      screen: Likes,
       options: {
         tabBarIcon: ({ color, size }) => (
           <Image
@@ -63,38 +64,6 @@ const RootStack = createNativeStackNavigator({
       options: {
         title: 'Home',
         headerShown: false,
-      },
-    },
-    Profile: {
-      screen: Profile,
-      linking: {
-        path: ':user(@[a-zA-Z0-9-_]+)',
-        parse: {
-          user: (value) => value.replace(/^@/, ''),
-        },
-        stringify: {
-          user: (value) => `@${value}`,
-        },
-      },
-    },
-    Settings: {
-      screen: Settings,
-      options: ({ navigation }) => ({
-        presentation: 'modal',
-        headerRight: () => (
-          <HeaderButton onPress={navigation.goBack}>
-            <Text>Close</Text>
-          </HeaderButton>
-        ),
-      }),
-    },
-    NotFound: {
-      screen: NotFound,
-      options: {
-        title: '404',
-      },
-      linking: {
-        path: '*',
       },
     },
   },

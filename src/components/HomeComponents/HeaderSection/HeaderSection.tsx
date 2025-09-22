@@ -4,8 +4,10 @@ import { styles } from './styles'
 import { theme } from '../../../config/constants'
 import { Icons } from '../../../assets/icons/icons'
 import { HBox, VBox } from '../../GeneralComponents/BoxComponents'
+import HomePageHeader from './HomePageHeader'
+import LikePageHeader from './LikePageHeader'
 
-const HeaderSection: React.FC = () => {
+const HeaderSection = ({ route }: { route: string }): React.JSX.Element => {
     return (
         <HBox style={
             [
@@ -16,17 +18,12 @@ const HeaderSection: React.FC = () => {
                 }
             ]
         }>
-            <VBox style={[styles.titleSection]}>
-                <Text style={[
-                    styles.subTitle
-                ]}>Hello, username!</Text>
-                <Text style={[
-                    styles.mainTitle
-                ]}>Z-Post Mobile</Text>
-            </VBox>
-            <HBox>
-                <Icons.Bell color={"black"} size={24} />
-            </HBox>
+            {
+                route === "Home" && <HomePageHeader />
+            }
+            {
+                route === "Likes" && <LikePageHeader />
+            }
         </HBox>
     )
 }
